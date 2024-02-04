@@ -1,0 +1,38 @@
+syntax = "proto3"; //版本声明，使用v3版本
+
+package pssm;
+option go_package = ".;pssmpb";
+ 
+//定义服务
+service pssm {
+
+  // 
+  rpc ServiceLinker(stream ServiceLinkerReq) returns (stream ServiceLinkerRes) {}
+}
+
+ 
+message ServiceLinkerReq { 
+    oneof Message{
+        HeartBeatReq msg = 1;
+        int32 X= 2;
+    };
+}
+
+// ServiceLinkerRes 请求结果
+message ServiceLinkerRes {
+    oneof Message{
+        HeartBeatRes msg = 1;
+    };
+}
+
+// HeartBeatReq 请求头
+message HeartBeatReq {
+    string address = 1;  
+}
+
+// HeartBeatRes 请求头
+message HeartBeatRes {
+    repeated string address = 1;  
+}
+
+ 
