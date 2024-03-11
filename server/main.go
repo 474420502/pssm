@@ -24,4 +24,8 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+
+	// rpc
+	// user_id clear (resource)
+	// guest_id clear (resource)
 }

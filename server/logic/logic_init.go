@@ -36,8 +36,16 @@ func (*PSSM) ServiceLinker(stream pssmpb.Pssm_ServiceLinkerServer) error {
 		}
 
 		resp := &pssmpb.ServiceLinkerRes{}
-		stream.Send(resp)
 
+		err = stream.Send(resp)
+		if err != nil {
+			if err == io.EOF {
+				log.Println(err, "%v closing", stream)
+				return err
+			}
+			log.Println(err)
+			continue
+		}
 	}
 
 	// panic("unimplemented")
